@@ -122,10 +122,12 @@ async function loadThread(retry = 0) {
       html += `
         <li class="post" id="post-${index}" data-id="${postId}">
           ${topRightButtons}
-          <div class="post-author">#${index} ${name}</div>
+          <div class="post-header">
+            <span class="poster-name">#${index} ${name}</span>
+            <span class="post-date">${time}</span>
+          </div>
           ${contentHtml}
           ${imageHtml}
-          <div class="post-time">${time}</div>
           ${bottomLeftButtons}
         </li>
       `;

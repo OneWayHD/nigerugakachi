@@ -170,18 +170,33 @@ footer {
   position: relative;
 }
 
-.post-meta {
-  font-size: 12px;
-  color: #6b7280;
+/* 投稿者名＋日付の横並び */
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #4b5563;
   margin-bottom: 6px;
 }
 
+.poster-name {
+  font-weight: bold;
+}
+
+.post-date {
+  font-style: italic;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* 本文 */
 .post-content {
-  font-size: 14px;
+  font-size: 16px;
   white-space: pre-wrap;
   word-break: break-word;
 }
 
+/* 画像 */
 .post-image {
   margin-top: 8px;
   max-width: 100%;
@@ -232,15 +247,15 @@ footer {
 }
 
 .reply-btn {
-  color: #16a34a; /* 緑 */
+  color: #16a34a;
 }
 
 .delete-btn {
-  color: #2563eb; /* 青 */
+  color: #2563eb;
 }
 
 .report-btn {
-  color: #dc2626; /* 赤 */
+  color: #dc2626;
 }
 
 .post-buttons-bottom-left {
