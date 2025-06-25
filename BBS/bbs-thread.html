@@ -77,13 +77,6 @@
       background: #1d4ed8;
     }
 
-    footer {
-      text-align: center;
-      font-size: 12px;
-      color: #666;
-      padding: 24px 0;
-    }
-
     .back-link {
       margin-top: 12px;
       display: inline-block;
@@ -104,9 +97,7 @@
 
   <main>
     <h2 id="thread-title">読み込み中...</h2>
-    <!-- ✅ カテゴリー表示部分（innerHTML書き込み用） -->
     <span id="thread-category-label"></span>
-
     <div id="posts"></div>
 
     <form id="reply-form">
@@ -116,8 +107,19 @@
     </form>
   </main>
 
+  <!-- ✅ 統一フッター -->
   <footer>
-    <a href="/index.html" style="text-decoration: none; color: #1f2937;">&copy; 2025 逃げるが勝ち</a>
+    <div class="footer-links">
+      <a href="/about.html">About</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>
+      <a href="/index.html" style="text-decoration: none; color: #1f2937;">
+        &copy; 2025 逃げるが勝ち
+      </a>
+    </p>
   </footer>
 
   <!-- 🔽 スクリプト読み込みはDOM描画の後 -->
