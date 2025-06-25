@@ -24,7 +24,7 @@ const storage = window.storage;
 
 // ✅ HTML要素取得
 const titleEl = document.getElementById("thread-title");
-const postList = document.getElementById("post-list");
+const postList = document.getElementById("posts");
 const replyForm = document.getElementById("reply-form");
 const replyTextarea = replyForm?.content;
 const imageInput = document.getElementById("imageInput");
@@ -54,7 +54,7 @@ async function loadThread(retry = 0) {
 
     if (!threadSnap.exists()) {
       if (retry < 3) {
-        return setTimeout(() => loadThread(retry + 1), 500); // 最大3回までリトライ
+        return setTimeout(() => loadThread(retry + 1), 500);
       } else {
         titleEl.innerText = "❌ 該当スレッドが見つかりません。";
         return;
@@ -70,6 +70,8 @@ async function loadThread(retry = 0) {
       "コーチ・指導者": "category-コーチ・指導者"
     };
     const cssClass = classMap[category] || "";
+
+    // ✅ nullチェック追加済
     if (categoryLabel) {
       categoryLabel.innerHTML = `<span class="category-label ${cssClass}">${category}</span>`;
     }
@@ -149,7 +151,7 @@ async function loadThread(retry = 0) {
       });
     });
 
-    // 削除（デモ用パスワードなし）
+    // 削除
     document.querySelectorAll(".delete-button").forEach(button => {
       button.addEventListener("click", async () => {
         const postId = button.dataset.id;
@@ -195,7 +197,7 @@ async function loadThread(retry = 0) {
 
 loadThread();
 
-// ✅ 返信フォーム処理
+// ✅ 返信投稿処理
 if (replyForm) {
   replyForm.addEventListener("submit", async (e) => {
     e.preventDefault();
