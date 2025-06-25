@@ -104,7 +104,7 @@
 
   <main>
     <h2 id="thread-title">読み込み中...</h2>
-    <!-- ✅ 追加箇所：カテゴリー表示 -->
+    <!-- ✅ カテゴリー表示部分（innerHTML書き込み用） -->
     <span id="thread-category-label"></span>
 
     <div id="posts"></div>
@@ -120,6 +120,7 @@
     <a href="/index.html" style="text-decoration: none; color: #1f2937;">&copy; 2025 逃げるが勝ち</a>
   </footer>
 
+  <!-- 🔽 スクリプト読み込みはDOM描画の後 -->
   <script type="module" src="/BBS/firebase-init.js"></script>
   <script type="module" src="/BBS/bbs-thread.js"></script>
 </body>
