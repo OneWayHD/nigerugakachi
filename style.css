@@ -268,3 +268,10 @@ footer {
 .anchor-link:hover {
   text-decoration: none;
 }
+
+/* ✅ リストマーカー削除 */
+ul, li, .post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
