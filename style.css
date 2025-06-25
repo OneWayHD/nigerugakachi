@@ -1,210 +1,270 @@
 /* ベース設定 */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-    background-color: #f8fafc;
-    color: #1f2937;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-  }
-  
-  header {
-    background-color: #0f172a;
-    color: white;
-    padding: 24px 16px;
-    text-align: center;
-  }
-  
-  main {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 24px 16px;
-  }
-  
-  h1 {
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
-    margin: 0;
-  }
-  
-  h2 {
-    font-size: 1.5rem;
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
-  }
-  
-  a {
-    color: #2563eb;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  .section {
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 24px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-  }
-  
-  /* ボタン */
-  .btn {
-    display: inline-block;
-    padding: 10px 16px;
-    margin-top: 12px;
-    background-color: #2563eb;
-    color: white;
-    font-weight: 500;
-    border-radius: 6px;
-    text-decoration: none;
-  }
-  
-  .btn:hover {
-    background-color: #1e40af;
-  }
-  
-  /* フッター */
-  footer {
-    background-color: #e2e8f0;
-    padding: 20px 16px;
-    text-align: center;
-    font-size: 14px;
-  }
-  
-  .footer-links {
-    margin-bottom: 8px;
-  }
-  
-  .footer-links a {
-    margin: 0 12px;
-    color: #1f2937;
-    font-weight: 500;
-  }
-  
-  /* 言語ドロップダウン（任意で残してもOK） */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f8fafc;
+  color: #1f2937;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+header {
+  background-color: #0f172a;
+  color: white;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+h1 {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.section {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* ボタン */
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  margin-top: 12px;
+  background-color: #2563eb;
+  color: white;
+  font-weight: 500;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #1e40af;
+}
+
+/* フッター */
+footer {
+  background-color: #e2e8f0;
+  padding: 20px 16px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.footer-links {
+  margin-bottom: 8px;
+}
+
+.footer-links a {
+  margin: 0 12px;
+  color: #1f2937;
+  font-weight: 500;
+}
+
+/* 言語ドロップダウン（任意） */
+.language-select {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.language-select select {
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+@media (max-width: 640px) {
   .language-select {
-    position: absolute;
-    top: 10px;
-    right: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 6px;
+    top: 6px;
+    right: 8px;
   }
-  
-  .language-select select {
-    padding: 4px 8px;
-    font-size: 12px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
+
+  main {
+    padding: 16px;
   }
-  
-  @media (max-width: 640px) {
-    .language-select {
-      top: 6px;
-      right: 8px;
-    }
-  
-    main {
-      padding: 16px;
-    }
+}
+
+/* 掲示板カテゴリタブ */
+.category-tab {
+  display: inline-block;
+  margin: 6px 8px 12px 0;
+  padding: 8px 12px;
+  background: #e5e7eb;
+  color: #1f2937;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.category-tab.active {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.category-tab.disabled {
+  background: #cbd5e1;
+  color: #6b7280;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* スレッド作成フォーム */
+.thread-form input,
+.thread-form textarea,
+.thread-form select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.thread-form button {
+  background: #2563eb;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.thread-form button:hover {
+  background: #1e40af;
+}
+
+/* 投稿カード */
+.post {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.post-meta {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.post-content {
+  font-size: 14px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.post-image {
+  margin-top: 8px;
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+/* 通報バッジ */
+.report-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  background: #f87171;
+  color: white;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* モバイル対応 */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem;
   }
-  
-  /* 掲示板カテゴリボタン（bbs.htmlで使用） */
-  .category-tab {
-    display: inline-block;
-    margin: 6px 8px 12px 0;
-    padding: 8px 12px;
-    background: #e5e7eb;
-    color: #1f2937;
-    border-radius: 6px;
-    cursor: pointer;
+
+  .section {
+    padding: 16px;
   }
-  
-  .category-tab.active {
-    background: #2563eb;
-    color: #ffffff;
-  }
-  
-  .category-tab.disabled {
-    background: #cbd5e1;
-    color: #6b7280;
-    cursor: not-allowed;
-    opacity: 0.7;
-  }
-  
-  /* 投稿カード（bbs-thread, moderate などで使用） */
-  .post-card {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 12px 16px;
-    margin-bottom: 16px;
-  }
-  
-  .post-meta {
-    font-size: 12px;
-    color: #6b7280;
-    margin-bottom: 6px;
-  }
-  
-  .post-content {
-    font-size: 14px;
-    white-space: pre-wrap;
-    word-break: break-word;
-  }
-  
-  /* スレッド作成フォーム */
-  .thread-form input,
-  .thread-form textarea,
-  .thread-form select {
+
+  .btn {
     width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    font-size: 14px;
+    text-align: center;
   }
-  
-  .thread-form button {
-    background: #2563eb;
-    color: white;
-    padding: 10px 16px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  .thread-form button:hover {
-    background: #1e40af;
-  }
-  
-  /* 通報バッジなど */
-  .report-badge {
-    display: inline-block;
-    padding: 4px 8px;
-    background: #f87171;
-    color: white;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: bold;
-  }
-  
-  /* モバイル対応補足 */
-  @media (max-width: 480px) {
-    h1 {
-      font-size: 1.8rem;
-    }
-  
-    .section {
-      padding: 16px;
-    }
-  
-    .btn {
-      width: 100%;
-      text-align: center;
-    }
-  }
-  
+}
+
+/* 👍左下、返信/削除/通報 右上配置 */
+.post-buttons-top-right {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 12px;
+}
+
+.post-buttons-top-right button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 6px;
+  font-size: 12px;
+}
+
+.reply-btn {
+  color: #16a34a; /* 緑 */
+}
+
+.delete-btn {
+  color: #2563eb; /* 青 */
+}
+
+.report-btn {
+  color: #dc2626; /* 赤 */
+}
+
+.post-buttons-bottom-left {
+  margin-top: 8px;
+  text-align: left;
+}
+
+.like-btn {
+  background: none;
+  border: none;
+  color: #1f2937;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.like-btn:hover {
+  opacity: 0.7;
+}
+
+.anchor-link {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.anchor-link:hover {
+  text-decoration: none;
+}

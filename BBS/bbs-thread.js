@@ -18,11 +18,9 @@ import {
   getDownloadURL
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-storage.js";
 
-// ✅ Firestoreインスタンス
 const db = window.db;
 const storage = window.storage;
 
-// ✅ HTML要素取得
 const titleEl = document.getElementById("thread-title");
 const postList = document.getElementById("posts");
 const replyForm = document.getElementById("reply-form");
@@ -30,18 +28,15 @@ const replyTextarea = replyForm?.content;
 const imageInput = document.getElementById("imageInput");
 const categoryLabel = document.getElementById("thread-category-label");
 
-// ✅ スレッドID取得
 const params = new URLSearchParams(location.search);
 const threadId = params.get("id");
 
-// ✅ >>アンカーをリンク化
 function linkifyAnchors(content) {
   return content.replace(/&gt;&gt;(\d+)/g, (match, num) => {
     return `<a href="#post-${num}" class="anchor-link">&gt;&gt;${num}</a>`;
   });
 }
 
-// ✅ リトライ付きスレッド読み込み関数
 async function loadThread(retry = 0) {
   if (!threadId) {
     titleEl.innerText = "❌ スレッドIDが指定されていません。";
@@ -70,8 +65,6 @@ async function loadThread(retry = 0) {
       "コーチ・指導者": "category-コーチ・指導者"
     };
     const cssClass = classMap[category] || "";
-
-    // ✅ nullチェック追加済
     if (categoryLabel) {
       categoryLabel.innerHTML = `<span class="category-label ${cssClass}">${category}</span>`;
     }
@@ -112,23 +105,28 @@ async function loadThread(retry = 0) {
         ? `<img src="${data.imageUrl}" class="post-image" alt="添付画像" />`
         : "";
 
-      const likeBtn = `<button class="like-button" data-id="${postId}">👍 ${data.likes || 0}</button>`;
-      const replyBtn = `<button class="reply-button" data-number="${index}">返信</button>`;
-      const reportBtn = `<button class="report-button" data-id="${postId}">通報</button>`;
-      const deleteBtn = true
-        ? `<button class="delete-button" data-id="${postId}">削除</button>`
-        : "";
+      const topRightButtons = `
+        <div class="post-buttons-top-right">
+          <button class="reply-btn" data-number="${index}">返信</button>
+          <button class="delete-btn" data-id="${postId}">削除</button>
+          <button class="report-btn" data-id="${postId}">通報</button>
+        </div>
+      `;
+
+      const bottomLeftButtons = `
+        <div class="post-buttons-bottom-left">
+          <button class="like-btn" data-id="${postId}">👍 ${data.likes || 0}</button>
+        </div>
+      `;
 
       html += `
         <li class="post" id="post-${index}" data-id="${postId}">
+          ${topRightButtons}
           <div class="post-author">#${index} ${name}</div>
           ${contentHtml}
           ${imageHtml}
           <div class="post-time">${time}</div>
-          <div class="reaction-bar">${likeBtn}</div>
-          ${replyBtn}
-          ${deleteBtn}
-          ${reportBtn}
+          ${bottomLeftButtons}
         </li>
       `;
       index++;
@@ -136,8 +134,7 @@ async function loadThread(retry = 0) {
 
     postList.innerHTML = html;
 
-    // 通報
-    document.querySelectorAll(".report-button").forEach(button => {
+    document.querySelectorAll(".report-btn").forEach(button => {
       button.addEventListener("click", async () => {
         const postId = button.dataset.id;
         const postRef = doc(db, "threads", threadId, "posts", postId);
@@ -151,8 +148,7 @@ async function loadThread(retry = 0) {
       });
     });
 
-    // 削除
-    document.querySelectorAll(".delete-button").forEach(button => {
+    document.querySelectorAll(".delete-btn").forEach(button => {
       button.addEventListener("click", async () => {
         const postId = button.dataset.id;
         if (!confirm("この投稿を削除してもよろしいですか？")) return;
@@ -163,8 +159,7 @@ async function loadThread(retry = 0) {
       });
     });
 
-    // >>アンカー
-    document.querySelectorAll(".reply-button").forEach(button => {
+    document.querySelectorAll(".reply-btn").forEach(button => {
       button.addEventListener("click", () => {
         const number = button.dataset.number;
         const current = replyTextarea.value;
@@ -175,8 +170,7 @@ async function loadThread(retry = 0) {
       });
     });
 
-    // いいね
-    document.querySelectorAll(".like-button").forEach(button => {
+    document.querySelectorAll(".like-btn").forEach(button => {
       button.addEventListener("click", async () => {
         const postId = button.dataset.id;
         const postRef = doc(db, "threads", threadId, "posts", postId);
@@ -197,7 +191,6 @@ async function loadThread(retry = 0) {
 
 loadThread();
 
-// ✅ 返信投稿処理
 if (replyForm) {
   replyForm.addEventListener("submit", async (e) => {
     e.preventDefault();
