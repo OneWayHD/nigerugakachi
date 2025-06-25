@@ -328,6 +328,7 @@ ul, li, .post-list {
 
 .share-icons {
   display: flex;
+  justify-content: center;
   gap: 14px;
   align-items: center;
   flex-wrap: wrap;
