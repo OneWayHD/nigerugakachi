@@ -27,7 +27,7 @@
 
     h2 {
       font-size: 20px;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
 
     .post {
@@ -104,6 +104,9 @@
 
   <main>
     <h2 id="thread-title">読み込み中...</h2>
+    <!-- ✅ 追加箇所：カテゴリー表示 -->
+    <span id="thread-category-label"></span>
+
     <div id="posts"></div>
 
     <form id="reply-form">
@@ -117,7 +120,6 @@
     <a href="/index.html" style="text-decoration: none; color: #1f2937;">&copy; 2025 逃げるが勝ち</a>
   </footer>
 
-  <!-- ✅ 修正済み：JSのパスを絶対パスに -->
   <script type="module" src="/BBS/firebase-init.js"></script>
   <script type="module" src="/BBS/bbs-thread.js"></script>
 </body>
