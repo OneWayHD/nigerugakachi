@@ -52,6 +52,11 @@ form.addEventListener("submit", async (e) => {
       replyCount: 1
     });
 
+    // ✅ threadRef が取得できなければ中止
+    if (!threadRef || !threadRef.id) {
+      throw new Error("スレッドIDの取得に失敗しました");
+    }
+
     // ✅ 初回投稿（本文）を登録
     await addDoc(collection(db, "threads", threadRef.id, "posts"), {
       name,
