@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>逃げるが勝ち</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- ✅ SEO / SNS 用 metaタグ -->
+  <meta name="description" content="逃げるが勝ちは、教師・上司・コーチなど責任ある立場の人が安心して本音を語れる匿名コミュニティです。">
+  <meta name="keywords" content="教師, 上司, コーチ, ハラスメント, 悩み相談, 共感, 匿名掲示板">
+  <meta name="author" content="One Way HD Co., Ltd.">
+
+  <!-- ✅ Google Search Console Verification -->
+  <meta name="google-site-verification" content="HHGDx68bEfBiDOGwsEU5KjM90uqtig6IZUqUrl58Ifg" />
+
+  <!-- ✅ AdSense 所有権確認用コード -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3836772651637182"
+     crossorigin="anonymous"></script>
+
+  <!-- ✅ OGP（SNSシェア用） -->
+  <meta property="og:title" content="逃げるが勝ち">
+  <meta property="og:description" content="教師・上司・コーチなど“立場がある人”のための本音・共感コミュニティ。">
+  <meta property="og:image" content="https://example.com/ogp.jpg">
+  <meta property="og:url" content="https://example.com">
+  <meta property="og:type" content="website">
+
+  <!-- ✅ Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="逃げるが勝ち">
+  <meta name="twitter:description" content="責任ある立場の人の“誰にも言えない気持ち”を分かち合う場所。">
+  <meta name="twitter:image" content="https://example.com/ogp.jpg">
+
+  <!-- ✅ Google Analytics GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KJ6LBW5FVP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KJ6LBW5FVP');
+  </script>
+
+  <!-- ✅ PWA対応用 -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <meta name="theme-color" content="#0f172a">
+
+  <style>
+    body {
+      font-family: sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      background: #f8fafc;
+      color: #1f2937;
+    }
+
+    header {
+      background: #0f172a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 16px;
+      background: #2563eb;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    .section {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      background: #e2e8f0;
+    }
+
+    .footer-links a {
+      margin: 0 12px;
+      color: #1f2937;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>逃げるが勝ち</h1>
+    <p>教師・上司・コーチなど、責任ある立場の人のための匿名コミュニティ</p>
+  </header>
+
+  <main>
+    <div class="section">
+      <h2>この掲示板について</h2>
+      <p>
+        「指導しただけなのに“ハラスメント”と受け取られた」<br>
+        「配慮してるのに、伝わらない」<br><br>
+        そんな悩みを抱えたあなたへ。<br>
+        ここは、教師・管理職・コーチ・医療従事者など、<strong>“立場がある人”のための共感空間</strong>です。
+      </p>
+      <a class="btn" href="bbs.html">掲示板を見る</a>
+    </div>
+
+    <div class="section">
+      <h2>ハラスメント解説記事</h2>
+      <p>誤解されがちな〇〇ハラスメントについて、基礎から実体験まで幅広く解説します。</p>
+      <a class="btn" href="articles.html">記事一覧を見る</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="about.html">About</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p>&copy; 2025 逃げるが勝ち</p>
+  </footer>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('✅ Service Worker registered'))
+        .catch(err => console.error('❌ Service Worker failed', err));
+    }
+  </script>
+</body>
+</html>

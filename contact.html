@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>お問い合わせ｜逃げるが勝ち</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .contact-container {
+      max-width: 800px;
+      margin: 60px auto;
+      padding: 20px;
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 1000px;
+      border: none;
+    }
+
+    @media (max-width: 600px) {
+      iframe {
+        height: 1200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ ヘッダー -->
+  <header style="text-align: center; padding: 24px 0; background-color: #0f172a;">
+    <a href="index.html" style="color: white; text-decoration: none; font-size: 24px; font-weight: bold;">
+      逃げるが勝ち
+    </a>
+  </header>
+
+  <div class="contact-container">
+    <h1>お問い合わせ</h1>
+    <p>
+      当サイト「逃げるが勝ち」に関するご意見・ご質問・ご連絡は、以下のフォームよりお送りください。<br>
+      内容を確認のうえ、必要に応じて返信または対応させていただきます。
+    </p>
+
+    <!-- ✅ Googleフォーム埋め込み -->
+    <iframe src="https://forms.gle/Rsi6DupdFn7qQwf9A" loading="lazy"></iframe>
+  </div>
+
+</body>
+</html>
