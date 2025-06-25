@@ -1,18 +1,16 @@
 import {
   getFirestore,
-  doc,
-  getDoc,
   collection,
   getDocs,
-  query,
-  orderBy,
+  getDoc,
   addDoc,
   updateDoc,
+  doc,
+  query,
+  orderBy,
   serverTimestamp,
-  updateDoc as updatePostDoc,
   increment
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
-
 import {
   getStorage,
   ref as storageRef,
@@ -20,35 +18,31 @@ import {
   getDownloadURL
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-storage.js";
 
-// ✅ Firebase インスタンス
+// ✅ Firestoreインスタンス
 const db = window.db;
 const storage = window.storage;
 
-// ✅ 管理者用設定（今後Auth連携でも可）
-const isAdmin = true;
-const ADMIN_PASSWORD = "w0rldM4rketNow";
-
-// ✅ URLパラメータからスレッドID取得
-const params = new URLSearchParams(location.search);
-const threadId = params.get("id");
-
-// ✅ DOM要素
+// ✅ HTML要素取得
 const titleEl = document.getElementById("thread-title");
-const categoryLabel = document.getElementById("thread-category-label");
 const postList = document.getElementById("post-list");
 const replyForm = document.getElementById("reply-form");
 const replyTextarea = replyForm?.content;
 const imageInput = document.getElementById("imageInput");
+const categoryLabel = document.getElementById("thread-category-label");
 
-// ✅ >>番号 リンク化
+// ✅ スレッドID取得
+const params = new URLSearchParams(location.search);
+const threadId = params.get("id");
+
+// ✅ >>アンカーをリンク化
 function linkifyAnchors(content) {
   return content.replace(/&gt;&gt;(\d+)/g, (match, num) => {
     return `<a href="#post-${num}" class="anchor-link">&gt;&gt;${num}</a>`;
   });
 }
 
-// ✅ スレッドと投稿一覧を読み込み
-async function loadThread() {
+// ✅ リトライ付きスレッド読み込み関数
+async function loadThread(retry = 0) {
   if (!threadId) {
     titleEl.innerText = "❌ スレッドIDが指定されていません。";
     return;
@@ -59,8 +53,12 @@ async function loadThread() {
     const threadSnap = await getDoc(threadRef);
 
     if (!threadSnap.exists()) {
-      titleEl.innerText = "❌ 該当スレッドが見つかりません。";
-      return;
+      if (retry < 3) {
+        return setTimeout(() => loadThread(retry + 1), 500); // 最大3回までリトライ
+      } else {
+        titleEl.innerText = "❌ 該当スレッドが見つかりません。";
+        return;
+      }
     }
 
     const threadData = threadSnap.data();
@@ -72,7 +70,9 @@ async function loadThread() {
       "コーチ・指導者": "category-コーチ・指導者"
     };
     const cssClass = classMap[category] || "";
-    categoryLabel.innerHTML = `<span class="category-label ${cssClass}">${category}</span>`;
+    if (categoryLabel) {
+      categoryLabel.innerHTML = `<span class="category-label ${cssClass}">${category}</span>`;
+    }
 
     titleEl.innerText = threadData.title || "(タイトルなし)";
 
@@ -113,7 +113,7 @@ async function loadThread() {
       const likeBtn = `<button class="like-button" data-id="${postId}">👍 ${data.likes || 0}</button>`;
       const replyBtn = `<button class="reply-button" data-number="${index}">返信</button>`;
       const reportBtn = `<button class="report-button" data-id="${postId}">通報</button>`;
-      const deleteBtn = isAdmin
+      const deleteBtn = true
         ? `<button class="delete-button" data-id="${postId}">削除</button>`
         : "";
 
@@ -134,42 +134,34 @@ async function loadThread() {
 
     postList.innerHTML = html;
 
-    // ✅ 通報処理
+    // 通報
     document.querySelectorAll(".report-button").forEach(button => {
       button.addEventListener("click", async () => {
         const postId = button.dataset.id;
         const postRef = doc(db, "threads", threadId, "posts", postId);
         try {
-          await updatePostDoc(postRef, { reported: true });
+          await updateDoc(postRef, { reported: true });
           alert("通報しました。ご協力ありがとうございます。");
           location.reload();
         } catch {
-          alert("通報に失敗しました。しばらくしてから再試行してください。");
+          alert("通報に失敗しました。しばらくして再試行してください。");
         }
       });
     });
 
-    // ✅ 管理者による削除処理
-    if (isAdmin) {
-      document.querySelectorAll(".delete-button").forEach(button => {
-        button.addEventListener("click", async () => {
-          const postId = button.dataset.id;
-          const input = prompt("管理者パスワードを入力してください：");
-          if (input !== ADMIN_PASSWORD) {
-            alert("パスワードが間違っています。削除を中止しました。");
-            return;
-          }
-          if (!confirm("この投稿を削除してもよろしいですか？")) return;
-
-          const postRef = doc(db, "threads", threadId, "posts", postId);
-          await updatePostDoc(postRef, { deleted: true });
-          alert("投稿を削除しました。");
-          location.reload();
-        });
+    // 削除（デモ用パスワードなし）
+    document.querySelectorAll(".delete-button").forEach(button => {
+      button.addEventListener("click", async () => {
+        const postId = button.dataset.id;
+        if (!confirm("この投稿を削除してもよろしいですか？")) return;
+        const postRef = doc(db, "threads", threadId, "posts", postId);
+        await updateDoc(postRef, { deleted: true });
+        alert("投稿を削除しました。");
+        location.reload();
       });
-    }
+    });
 
-    // ✅ >>アンカー返信
+    // >>アンカー
     document.querySelectorAll(".reply-button").forEach(button => {
       button.addEventListener("click", () => {
         const number = button.dataset.number;
@@ -181,13 +173,13 @@ async function loadThread() {
       });
     });
 
-    // ✅ いいね処理
+    // いいね
     document.querySelectorAll(".like-button").forEach(button => {
       button.addEventListener("click", async () => {
         const postId = button.dataset.id;
         const postRef = doc(db, "threads", threadId, "posts", postId);
         try {
-          await updatePostDoc(postRef, { likes: increment(1) });
+          await updateDoc(postRef, { likes: increment(1) });
           location.reload();
         } catch {
           alert("いいねに失敗しました。再試行してください。");
@@ -195,14 +187,15 @@ async function loadThread() {
       });
     });
 
-  } catch {
-    titleEl.innerText = "❌ スレッドの読み込みに失敗しました。";
+  } catch (err) {
+    console.error("❌ スレッド読み込み失敗:", err);
+    titleEl.innerText = "❌ スレッドの読み込み中にエラーが発生しました。";
   }
 }
 
 loadThread();
 
-// ✅ 返信フォーム送信処理（画像添付対応）
+// ✅ 返信フォーム処理
 if (replyForm) {
   replyForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -216,7 +209,7 @@ if (replyForm) {
 
     const name = replyForm.name.value.trim() || "匿名";
     const content = replyForm.content.value.trim();
-    const imageFile = imageInput.files[0];
+    const imageFile = imageInput?.files?.[0];
     if (!content || content.length < 5) {
       alert("本文は5文字以上で入力してください。");
       return;
