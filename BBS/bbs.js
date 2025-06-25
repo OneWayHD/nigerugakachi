@@ -14,8 +14,8 @@ const db = window.db;
 const threadList = document.getElementById("thread-list");
 const categoryTabs = document.querySelectorAll(".category-tab");
 
-// ✅ 選択中カテゴリ（初期値：上司・管理職）
-let selectedCategory = "上司・管理職";
+// ✅ 初期カテゴリを最初のタブから取得（今後追加されても対応）
+let selectedCategory = categoryTabs[0]?.dataset.category || "";
 
 // ✅ スレッド読み込み処理（カテゴリ別）
 async function loadThreadsByCategory(category) {
@@ -60,7 +60,7 @@ async function loadThreadsByCategory(category) {
   }
 }
 
-// ✅ カテゴリタブ切り替えイベント
+// ✅ カテゴリタブ切り替えイベント（追加にも自動対応）
 categoryTabs.forEach(tab => {
   tab.addEventListener("click", () => {
     categoryTabs.forEach(t => t.classList.remove("active"));
@@ -70,5 +70,9 @@ categoryTabs.forEach(tab => {
   });
 });
 
-// ✅ 初期ロード（上司・管理職）
-loadThreadsByCategory(selectedCategory);
+// ✅ 初期ロード（最初のカテゴリから）
+if (selectedCategory) {
+  loadThreadsByCategory(selectedCategory);
+} else {
+  threadList.innerHTML = "<p style='color:#64748b;'>カテゴリが選択されていません。</p>";
+}

@@ -47,28 +47,6 @@
       margin-bottom: 20px;
     }
 
-    .category-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-
-    .category-tab {
-      padding: 6px 14px;
-      border: none;
-      border-radius: 6px;
-      background-color: #94a3b8;
-      color: #fff;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .category-tab.active {
-      background-color: #0ea5e9;
-    }
-
     .thread-list {
       list-style: none;
       padding: 0;
@@ -121,8 +99,8 @@
 
     <a class="create-button" href="bbs-create.html">＋ 新しくスレッドを作成</a>
 
-    <!-- ✅ カテゴリタブ -->
-    <div class="category-tabs">
+    <!-- ✅ カテゴリタブ（.category-wrapperで包んでflex制御） -->
+    <div class="category-wrapper">
       <button class="category-tab active" data-category="上司・管理職">上司・管理職</button>
       <button class="category-tab" data-category="先生・講師">先生・講師</button>
       <button class="category-tab" data-category="コーチ・指導者">コーチ・指導者</button>
