@@ -173,14 +173,15 @@ footer {
 /* 投稿者名＋日付の横並び */
 .post-header {
   display: flex;
-  justify-content: space-between;
-  font-size: 13px;
-  color: #4b5563;
+  flex-direction: column; /* ← 横並び → 縦並びに変更 */
+  gap: 2px;
   margin-bottom: 6px;
 }
 
 .poster-name {
   font-weight: bold;
+  font-size: 13px;
+  color: #4b5563;
 }
 
 .post-date {
