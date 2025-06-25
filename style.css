@@ -291,3 +291,17 @@ ul, li, .post-list {
   padding: 0;
   margin: 0;
 }
+
+@media (max-width: 480px) {
+  .btn {
+    width: 100%;
+    box-sizing: border-box; /* ← これ重要！ */
+    padding-left: 12px;
+    padding-right: 12px;
+    text-align: center;
+  }
+
+  .section {
+    padding: 16px;
+  }
+}
