@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>掲示板｜逃げるが勝ち</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    body {
+      background-color: #f8fafc;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #0f172a;
+      color: #fff;
+      text-align: center;
+      padding: 16px 0;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .notice {
+      background-color: #fff3cd;
+      color: #856404;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ffeeba;
+      border-radius: 4px;
+    }
+
+    .create-button {
+      display: inline-block;
+      background-color: #0ea5e9;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .category-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .category-tab {
+      padding: 6px 14px;
+      border: none;
+      border-radius: 6px;
+      background-color: #94a3b8;
+      color: #fff;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .category-tab.active {
+      background-color: #0ea5e9;
+    }
+
+    .thread-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .thread-item {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .thread-item a {
+      text-decoration: none;
+      font-weight: bold;
+      color: #0f172a;
+    }
+
+    .thread-meta {
+      font-size: 12px;
+      color: #718096;
+      margin-top: 4px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>掲示板（共感スレッド）</h1>
+    <div style="text-align: center; margin-top: 8px;">
+      <a href="../index.html" style="color: #0ea5e9; text-decoration: underline; font-size: 14px;">
+        ← トップページに戻る
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <div class="notice">
+      🛠 この掲示板は現在開発中です。どなたでも投稿できますが、通報・非表示機能はテスト段階です。
+    </div>
+
+    <a class="create-button" href="bbs-create.html">＋ 新しくスレッドを作成</a>
+
+    <!-- ✅ カテゴリタブ -->
+    <div class="category-tabs">
+      <button class="category-tab active" data-category="上司・管理職">上司・管理職</button>
+      <button class="category-tab" data-category="先生・講師">先生・講師</button>
+      <button class="category-tab" data-category="コーチ・指導者">コーチ・指導者</button>
+    </div>
+
+    <!-- ✅ スレッド一覧 -->
+    <ul class="thread-list" id="thread-list">
+      <!-- JSでFirestoreからスレッド取得して動的に表示されます -->
+    </ul>
+  </main>
+
+  <footer>
+    <a href="../index.html" style="text-decoration: none; color: #1f2937;">
+      &copy; 2025 逃げるが勝ち
+    </a>
+  </footer>
+
+  <!-- ✅ Firebase 初期化 & スレッド取得 -->
+  <script type="module" src="firebase-init.js"></script>
+  <script type="module" src="bbs.js"></script>
+</body>
+</html>
